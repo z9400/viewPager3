@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.z9400.viewpager3.adapter.PagerAdapter;
 import com.z9400.viewpager3.fragment.FragmentPage1;
@@ -39,6 +40,8 @@ public class MainActivity extends FragmentActivity {
     private ArrayList<Fragment> fragments;
     private Fragment newfragment;
     private PagerAdapter mAdapetr;
+    
+    private double back_pressed ;
     
     protected ViewPager mViewPager;
     protected LinearLayout mRadioGroup_content;
@@ -202,6 +205,25 @@ public class MainActivity extends FragmentActivity {
             }
             mRadioGroup_content.getChildAt(j).setSelected(ischeck);
         }
+    }
+    
+    
+    /**
+     * 点击两次返回退出系统
+     * 
+     * @param view
+     */
+    @Override
+    public void onBackPressed() {
+            if (back_pressed + 3000 > System.currentTimeMillis()) {
+                finish();
+                super.onBackPressed();
+            }
+            else{
+            	Toast.makeText(this, "再按真就退出了",Toast.LENGTH_SHORT).show();
+            }
+
+            back_pressed = System.currentTimeMillis();
     }
 
 
