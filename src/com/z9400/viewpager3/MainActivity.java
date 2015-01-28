@@ -101,11 +101,10 @@ public class MainActivity extends FragmentActivity {
 
     private void initViewPager() {
         mAdapetr = new PagerAdapter(
-                getSupportFragmentManager());
+                getSupportFragmentManager(),fragments);
         mViewPager.setOffscreenPageLimit(1);
         mViewPager.setAdapter(mAdapetr);
         mViewPager.setOnPageChangeListener(pageListener);
-        mAdapetr.appendList(fragments);
     }
 
 
@@ -188,26 +187,20 @@ public class MainActivity extends FragmentActivity {
      */
     private void selectTab(int tab_postion) {
         columnSelectIndex = tab_postion;
-        for (int i = 0; i < mRadioGroup_content.getChildCount(); i++) {
-            View checkView = mRadioGroup_content.getChildAt(tab_postion);
-            int k = checkView.getMeasuredWidth();
-            int l = checkView.getLeft();
-            int i2 = l + k / 2 - mScreenWidth / 2;
-            // rg_nav_content.getParent()).smoothScrollTo(i2, 0);
-            mColumnHorizontalScrollView.smoothScrollTo(i2, 0);
-            // mColumnHorizontalScrollView.smoothScrollTo((position - 2) *
-            // mItemWidth , 0);
-        }
+        View checkView = mRadioGroup_content.getChildAt(tab_postion);
+        int k = checkView.getMeasuredWidth();
+        int l = checkView.getLeft();
+        int i2 = l + k / 2 - mScreenWidth / 2;
+        mColumnHorizontalScrollView.smoothScrollTo(i2, 0);
         // ÅÐ¶ÏÊÇ·ñÑ¡ÖÐ
         for (int j = 0; j < mRadioGroup_content.getChildCount(); j++) {
-            View checkView = mRadioGroup_content.getChildAt(j);
             boolean ischeck;
             if (j == tab_postion) {
                 ischeck = true;
             } else {
                 ischeck = false;
             }
-            checkView.setSelected(ischeck);
+            mRadioGroup_content.getChildAt(j).setSelected(ischeck);
         }
     }
 
